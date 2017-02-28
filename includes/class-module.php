@@ -24,7 +24,7 @@ class EJO_Base_Module
      */
     public static function get_module( $id )
     {
-        $modules = EJO_Base::$modules;
+        $modules = EJO_Base_Module_Manager::$modules;
 
         //* Return false if module id is not found
         if ( empty($modules[$id]) )
@@ -254,16 +254,16 @@ class EJO_Base_Module
     public static function print_why_not_available( $id ) 
     {
         if ( ! self::exists($id) ) {
-            echo __( 'Module doesn\'t exist', EJO_Base::$slug );
+            echo __( 'Module doesn\'t exist', EJO_Base_Module_Manager::$slug );
         }
         elseif ( ! self::has_theme_support($id) ) {
-            echo __( 'No theme-support', EJO_Base::$slug );
+            echo __( 'No theme-support', EJO_Base_Module_Manager::$slug );
         }
         elseif ( self::has_missing_dependancies($id) ) {
-            echo __( 'Missing dependancies', EJO_Base::$slug );
+            echo __( 'Missing dependancies', EJO_Base_Module_Manager::$slug );
         }
         else {
-            echo __( 'Module not available', EJO_Base::$slug );
+            echo __( 'Module not available', EJO_Base_Module_Manager::$slug );
         }
     }
 

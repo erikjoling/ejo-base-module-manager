@@ -32,7 +32,7 @@ if ( !current_user_can( 'manage_options' ) )  {
 				<?php 
 
 				$ejo_base_active_modules = get_option( 'ejo_base_active_modules', array() );
-				foreach (EJO_Base::$modules as $id => $module) {
+				foreach (EJO_Base_Module_Manager::$modules as $id => $module) {
 					show_module_row( $module, $ejo_base_active_modules );
 				}
 
@@ -52,7 +52,7 @@ function show_module_row($module, $active_modules = null)
 	if ( ! $active_modules )
             $active_modules = get_option( 'ejo_base_active_modules', array() );
 
-	$menu_page = EJO_Base_Module_Manager::$menu_page;
+	$menu_page = EJO_Base_Module_Manager::$slug;
 
 	$is_available = EJO_Base_Module::is_available( $module['id'] );
 	$has_theme_support = EJO_Base_Module::has_theme_support( $module['id'] );

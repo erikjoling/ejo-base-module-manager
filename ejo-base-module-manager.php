@@ -209,8 +209,7 @@ final class EJO_Base_Module_Manager
     /* Register EJObase Options Menu Page */
     public static function register_menu()
     {
-        // add_menu_page( __('EJO Base Modules'), __('EJO Base'), 'manage_options', self::$menu_page, array( 'EJO_Base_Module_Manager', 'add_menu_page' ) );
-        add_submenu_page( 'options-general.php', __('EJO Base Modules'), __('EJO Base Modules'), 'manage_options', self::$menu_page, array( 'EJO_Base_Module_Manager', 'add_menu_page' ) );
+        add_submenu_page( 'options-general.php', __('EJO Base Modules'), __('EJO Base Modules'), 'manage_options', self::$slug, array( 'EJO_Base_Module_Manager', 'add_menu_page' ) );
     }
 
     /* Add EJObase Options Menu Page */
