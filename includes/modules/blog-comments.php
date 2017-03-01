@@ -56,14 +56,10 @@ if ( ! EJO_Base_Module::is_active('blog-comments') ) {
     });
 
     //* Remove widget 
-    add_filter( 'ejo_base_unregister_widgets', function($widgets_to_unregister) {
+    add_action( 'widgets_init', function() {
 
     	//* Manipulations do not count for admin users
-        if (current_user_can('manage_options'))
-            return $widgets_to_unregister;
-
-		$widgets_to_unregister[] = 'WP_Widget_Recent_Comments';
-
-        return $widgets_to_unregister;
-    });
+        if ( ! current_user_can('manage_options') )
+            unregister_widget( 'WP_Widget_Recent_Comments' );
+    }, 11);
 }

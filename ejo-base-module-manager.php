@@ -69,6 +69,9 @@ final class EJO_Base_Module_Manager
         self::set_modules();
 
         //* Immediatly include helpers
+        add_action( 'plugins_loaded', array( 'EJO_Base_Module_Manager', 'helpers' ), 9 );
+
+        //* Immediatly include helpers
         add_action( 'plugins_loaded', array( 'EJO_Base_Module_Manager', 'module_manager' ) );
     }
 
@@ -82,6 +85,13 @@ final class EJO_Base_Module_Manager
 
         /* Load the translation for the plugin */
         load_plugin_textdomain( 'ejo-base-module-manager', false, 'ejo-base-module-manager/languages' );
+    }
+
+    /* Add helper functions */
+    public static function helpers() 
+    {
+        /* Include helpers */
+        require_once( self::$inc_dir . 'helpers.php' );
 
         /* Include class module */
         require_once( self::$inc_dir . 'class-module.php' );
@@ -90,13 +100,6 @@ final class EJO_Base_Module_Manager
     /* Add helper functions */
     public static function module_manager() 
     {
-        /* Check dependancies */
-        if ( ! class_exists('EJO_Base') ) {
-            error_log( 'Error: EJO Base is not installed. To use the EJO Base Module Manager you must first install the EJO Base plugin.' );
-
-            return;
-        }
-
         /* Allow array-arguments to be passed for theme-support:ejo-base-modules */
         add_filter( 'current_theme_supports-ejo-base-modules', 'ejo_add_extended_theme_support', 10, 3 );
         
@@ -231,7 +234,6 @@ final class EJO_Base_Module_Manager
         //* Modules
         require_once( self::$inc_dir . 'modules/blog.php' ); // Blog
         require_once( self::$inc_dir . 'modules/blog-comments.php' ); // Blog Comments
-        // require_once( self::$inc_dir . 'modules/contactads.php' ); // EJO Contactadvertenties
         require_once( self::$inc_dir . 'modules/testimonials.php' ); // EJO Simple testimonials
         // require_once( self::$inc_dir . 'modules/portfolio.php' ); // EJO Portfolio
         // require_once( self::$inc_dir . 'modules/popup-box.php' ); // EJO Popup-box
